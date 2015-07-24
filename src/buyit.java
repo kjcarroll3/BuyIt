@@ -12,22 +12,23 @@ public class buyit {
 	private static final Scanner input = new Scanner(System.in);
 	public static void main(String[] args) {
 
-	//Variable for user to choose selection
-	int userInput = 0;
+	//Other Variables
+	int userInput = 0; //UI flag
+	int uauth = 0;	//User authentication flag
 	
 	//Global Variables
-	String uid;
-	String pwd;
-	String pwd2;
-	String fname;
-	String lname;
-	String addr;
-	String city;
-	String state;
-	String email;
-	String search;
-	int zip;
-	int cc_num;
+	String uid = null;
+	String pwd = null;
+	String pwd2 = null;
+	String fname = null;
+	String lname = null;
+	String addr = null;
+	String city = null;
+	String state = null;
+	String email = null;
+	String search = null;
+	int zip = 0;
+	int cc_num = 0;
 	
 	try{
 		while (userInput != 4){
@@ -46,57 +47,51 @@ public class buyit {
 			{
 				System.out.println("You have selected User Registration. Please complete the following: \n");
 				
-				//String uid;
 				System.out.println("Username desired:\n");  //Ask for username desired
 				uid = input.nextLine();
 				
-				//String pwd;
 				System.out.println("Password:\n"); //ask for password for user account
+				System.out.println("For account security, BuyIy accounts are required to meet the following requirements:");
+				System.out.println("1. Password must contain at least one UPPERCASE and LOWERCASE character.");
+				System.out.println("2. Password must have at least one special character. eg. !,@,#,$,%,&");
+				System.out.println("3. Password must be at least 12 characters long.\n");
 				pwd = input.nextLine();
 				
-				//Check if password is empty
-				
-				//String pwd2;
-				System.out.println("Retype Password:\n"); //ask for password for user account (for comparison)
+				System.out.println("Retype Password entered:\n"); //ask for password for user account (for comparison)
 				pwd2 = input.nextLine();
 				
 				//Call password function
 				CheckPassword(pwd, pwd2);
 				
-				//String fname;
 				System.out.println("First Name:\n");
 				fname = input.nextLine();
 				
-				//String lname;
 				System.out.println("Last Name:\n");
 				lname = input.nextLine();
-				
-				//String addr;
+				/*
 				System.out.println("Address:\n");
 				addr = input.nextLine();
 				
-				//String city;
 				System.out.println("City:\n");
 				city = input.nextLine();
 				
-				//String state;
 				System.out.println("State:\n");
 				state = input.nextLine();
 				
-				//int zip;
 				System.out.println("Zip Code:\n");
 				zip = input.nextInt();
 				
-				//String email;
 				System.out.println("Email Address:\n");
 				email = input.nextLine();
 				
-				//int cc_num;
 				System.out.println("Credit Card No.:\n");
 				cc_num = input.nextInt();
+				*/
 				
 				//Print out all information onto the screen
-				
+				System.out.println("Your username is: " + uid + " and your password is: " + pwd);
+				System.out.println("Congratulations " + fname + " " + lname +" ! Welcome to BuyIt!");
+				System.out.println("Please login to your BuyIt account to use site features!");
 			}
 			else if (userInput == 2) //User login
 			{
@@ -104,11 +99,11 @@ public class buyit {
 				
 				//User enter credentials
 				//String uid;
-				System.out.println("Username:\n");
+				System.out.println("Enter Username:\n");
 				uid = input.nextLine();
 				
 				//String pwd;
-				System.out.println("Password:\n");
+				System.out.println("Enter Password:\n");
 				pwd = input.nextLine();
 				
 				// Look up db for exact credentials
@@ -116,6 +111,7 @@ public class buyit {
 				
 				//Sucess Message
 				System.out.println("Your credentials match! Login was a sucess!\n");
+				uauth = uauth + 20; //user authentication flag
 				
 				//Allow user to access other interfaces
 			}
@@ -132,62 +128,28 @@ public class buyit {
 	
 	}
 	
-	//Password checking function
-	//Checks if pwd and pwd2 are the same
-	//Checks if pwd is alphanumeric and at least 12 characters
+	/* 
+	 * This function checks if the password matches and 
+	 * if the password matches the conditions for user accounts.
+	 */
 	public static void CheckPassword(String a, String b)
 	{
-		int flag = 0;
+		boolean match = a.equals(b);					 //Check if passwords match
+		boolean Uppercase = !a.equals(a.toLowerCase());  //Check if password has uppercase
+		boolean Lowercase = !a.equals(a.toUpperCase());  //Check if password has lowercase
+		boolean min_length = a.length() >= 12;			 //Check if password is at least 12 or more
+		boolean special = !a.matches("[A-za-z0-9 ]*");	 //Check if password has special characters
+		boolean conditions = !(a.contains("AND") || a.contains("NOT")); 
 		
-		//Compare string a to string b
-		if (a.equals(b))
-		{
-			flag = flag + 1; //flag counter
-		}
-		else
-		{
-			flag = 0;
-		}
+		if (!match) 
+			{
+				System.out.println("Warning! The passwords entered don't match!\n"); 
+				return;
+			}
+		if (!Uppercase) System.out.println("Password must contain an uppercase!\n");
+		if (!Lowercase) System.out.println("Password must contain an lowercase!\n");
+		if (!min_length) System.out.println("Password must be at least 12 characters long!\n");
+		if (!special) System.out.println("Password must contain a special character!\n");
 		
-		//validate password for requirements
-		if (a.matches("[A-Za-z0-9]+")) //bug
-		{
-			flag = flag + 1;
-		}
-		else
-		{
-			flag = flag + 0;
-		}
-		
-		//check if password is at least 12 characters long
-		if (a.length() >= 12)
-		{
-			flag = flag + 1;
-		}
-		else
-		{
-			flag = flag + 0;
-		}
-		
-		//validation message
-		if (flag == 1)
-		{
-			System.out.println("Passwords match!\n");
-			System.out.println("Password doesn't meet minimum requirements!\n");
-		}
-		else if (flag == 2)
-		{
-			System.out.println("Passwords match!\n");
-			System.out.println("Password meets minimum requirements!\n");
-		}
-		else if (flag == 3)
-		{
-			System.out.println("Password meets all requirements!\n");
-		}
-		else
-		{
-			System.out.println("Passwords entered don't match!\n");
-			System.out.println("Password doesn't meet minimum requirements!\n)");
-		}
 	}
 }
