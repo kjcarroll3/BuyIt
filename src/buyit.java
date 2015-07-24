@@ -1,4 +1,11 @@
-// Libraries
+/*
+ * Project Name: BuyIt
+ * Created by: Evan Law, Kenneth Carroll, Tsun (Jaeryn) Chu
+ * Date: 23 07 2015
+ * ICS491
+ */
+
+// Libraries to import
 import java.util.*;
 
 public class buyit {
@@ -8,7 +15,7 @@ public class buyit {
 	//Variable for user to choose selection
 	int userInput = 0;
 	
-	//Local variables
+	//Global Variables
 	String uid;
 	String pwd;
 	String pwd2;
@@ -125,9 +132,13 @@ public class buyit {
 	
 	}
 	
+	//Password checking function
+	//Checks if pwd and pwd2 are the same
+	//Checks if pwd is alphanumeric and at least 12 characters
 	public static void CheckPassword(String a, String b)
 	{
 		int flag = 0;
+		
 		//Compare string a to string b
 		if (a.equals(b))
 		{
@@ -148,6 +159,16 @@ public class buyit {
 			flag = flag + 0;
 		}
 		
+		//check if password is at least 12 characters long
+		if (a.length() >= 12)
+		{
+			flag = flag + 1;
+		}
+		else
+		{
+			flag = flag + 0;
+		}
+		
 		//validation message
 		if (flag == 1)
 		{
@@ -158,6 +179,10 @@ public class buyit {
 		{
 			System.out.println("Passwords match!\n");
 			System.out.println("Password meets minimum requirements!\n");
+		}
+		else if (flag == 3)
+		{
+			System.out.println("Password meets all requirements!\n");
 		}
 		else
 		{
