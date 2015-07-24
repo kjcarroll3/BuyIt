@@ -43,11 +43,7 @@ public class buyit {
 	try{
 		while (userInput != 4){
 			//Message to User
-			System.out.println("What would you like to do? ");
-			System.out.println("1 - User Registration");
-			System.out.println("2 - User Login");
-			System.out.println("3 - Search ADs");
-			System.out.println("4 - Exit");
+			printLoginMenu();
 			
 			//Catch numerical input for the var. userInput
 			userInput = input.nextInt(); 
@@ -57,23 +53,25 @@ public class buyit {
 			{
 				System.out.println("You have selected User Registration. Please complete the following: \n");
 				
-				System.out.println("Username desired:\n");  //Ask for username desired
+				System.out.print("Username desired: ");  //Ask for username desired
 				uid = input.nextLine();
+				System.out.println();
 				
 				while (pwd_condition == false)
 				{
-					System.out.println("Password:"); //ask for password for user account
 					System.out.println("For account security, BuyIy accounts are required to meet the following requirements:");
 					System.out.println("1. Password must contain at least one UPPERCASE and LOWERCASE character.");
 					System.out.println("2. Password must have at least one special character. eg. !,@,#,$,%,&");
 					System.out.println("3. Password must be at least 12 characters long.\n");
+					System.out.print("Desired password: "); //ask for password for user account
 					pwd = input.nextLine();
 					
-					System.out.println("Retype Password entered:\n"); //ask for password for user account (for comparison)
+					System.out.print("Retype Password entered: "); //ask for password for user account (for comparison)
 					pwd2 = input.nextLine();
+					System.out.println();
 					
 					//Call password function
-					CheckPassword(pwd, pwd2);
+					checkPassword(pwd, pwd2);
 				}
 				
 				System.out.println("First Name:\n");
@@ -113,11 +111,11 @@ public class buyit {
 				
 				//User enter credentials
 				//String uid;
-				System.out.println("Enter Username:");
+				System.out.print("Enter Username: ");
 				uid = input.nextLine();
 				
 				//String pwd;
-				System.out.println("Enter Password:");
+				System.out.print("Enter Password: ");
 				pwd = input.nextLine();
 				
 				// Look up db for exact credentials
@@ -142,11 +140,22 @@ public class buyit {
 	
 	}
 	
+	/* FUNCTION COMMENT */
+	public static void printLoginMenu() 
+	{
+		System.out.println("What would you like to do? ");
+		System.out.println("1 - User Registration");
+		System.out.println("2 - User Login");
+		System.out.println("3 - Search ADs");
+		System.out.println("4 - Exit");
+	}
+	
+	
 	/* 
 	 * This function checks if the password matches and 
 	 * if the password matches the conditions for user accounts.
 	 */
-	public static boolean CheckPassword(String a, String b)
+	public static boolean checkPassword(String a, String b)
 	{
 		match = a.equals(b);					 //Check if passwords match
 		Uppercase = !a.equals(a.toLowerCase());  //Check if password has uppercase
