@@ -37,8 +37,8 @@ public class buyit {
 	String state = null;
 	String email = null;
 	String search = null;
-	int zip = 0;
-	int cc_num = 0;
+	String zip = null;
+	String cc_num = null;
 	
 	try{
 		while (userInput != 4){
@@ -76,7 +76,7 @@ public class buyit {
 					CheckPassword(pwd, pwd2);
 				}
 				
-				/*System.out.println("First Name:\n");
+				System.out.println("First Name:\n");
 				fname = input.nextLine();
 				
 				System.out.println("Last Name:\n");
@@ -92,20 +92,20 @@ public class buyit {
 				state = input.nextLine();
 				
 				System.out.println("Zip Code:\n");
-				zip = input.nextInt();
+				zip = input.nextLine();
 				
 				System.out.println("Email Address:\n");
 				email = input.nextLine();
 				
 				System.out.println("Credit Card No.:\n");
-				cc_num = input.nextInt();
+				cc_num = input.nextLine();
 				
 				//Send data over to the db
 				
 				//Print out user information onto the screen
 				System.out.println("Your username is: " + uid + " and your password is: " + pwd);
 				System.out.println("Congratulations " + fname + " " + lname +" ! Welcome to BuyIt!");
-				System.out.println("Your account has been created. Please login to your BuyIt account to use site features!");*/
+				System.out.println("Your account has been created. Please login to your BuyIt account to use site features!");
 			}
 			else if (userInput == 2) //User login
 			{
@@ -152,7 +152,7 @@ public class buyit {
 		Uppercase = !a.equals(a.toLowerCase());  //Check if password has uppercase
 		Lowercase = !a.equals(a.toUpperCase());  //Check if password has lowercase
 		min_length = a.length() >= 12;			 //Check if password is at least 12 or more
-		special = !a.matches("[A-za-z0-9 ]^*()-+=\/,.<>`");	 //Check if password has special characters
+		special = !a.matches("[A-za-z0-9 ]*");	 //Check if password has special characters
 		
 		if (!match) 
 			{
