@@ -9,6 +9,8 @@
 import java.util.*;
 
 public class buyit {
+	
+	//Global Variables
 	static boolean match;
 	static boolean Uppercase;
 	static boolean Lowercase;
@@ -18,13 +20,13 @@ public class buyit {
 	static boolean pwd_condition = false;
 	
 	private static final Scanner input = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 
-	//Other Variables
+	//Variables
 	int userInput = 0; //UI flag
 	int uauth = 0;	//User authentication flag
 	
-	//Global Variables
 	String uid = null;
 	String pwd = null;
 	String pwd2 = null;
@@ -150,7 +152,7 @@ public class buyit {
 		Uppercase = !a.equals(a.toLowerCase());  //Check if password has uppercase
 		Lowercase = !a.equals(a.toUpperCase());  //Check if password has lowercase
 		min_length = a.length() >= 12;			 //Check if password is at least 12 or more
-		special = !a.matches("[A-za-z0-9 ]*");	 //Check if password has special characters
+		special = !a.matches("[A-za-z0-9 ]^*()-+=\/,.<>`");	 //Check if password has special characters
 		
 		if (!match) 
 			{
@@ -160,11 +162,11 @@ public class buyit {
 			}
 		else 
 		{
-			if (!Uppercase) System.out.println("Password must contain an uppercase!\n");
-			if (!Lowercase) System.out.println("Password must contain an lowercase!\n");
-			if (!min_length) System.out.println("Password must be at least 12 characters long!\n");
-			if (!special) System.out.println("Password must contain a special character!\n");
-			return pwd_condition = true;
+			if (!Uppercase || !Lowercase || !min_length || !special) {
+				System.out.println("Password doesn't meet requirements!\n");
+				return pwd_condition = false;
+			}
+			else return pwd_condition = true;
 		}
 	}
 }
