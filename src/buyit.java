@@ -18,6 +18,7 @@ public class buyit {
 	static boolean special;
 	static boolean conditions;
 	static boolean pwd_condition = false;
+	static boolean uid_exists = true;
 	
 	private static final Scanner input = new Scanner(System.in);
 	
@@ -30,18 +31,9 @@ public class buyit {
 	String uid = null;
 	String pwd = null;
 	String pwd2 = null;
-	String fname = null;
-	String lname = null;
-	String addr = null;
-	String city = null;
-	String state = null;
-	String email = null;
-	String search = null;
-	String zip = null;
-	String cc_num = null;
 	
 	try{
-		while (userInput != 4){
+		while (uauth != 20){
 			//Message to User
 			printLoginMenu();
 			
@@ -51,11 +43,16 @@ public class buyit {
 			
 			if (userInput == 1) //User Registration Value
 			{
-				System.out.println("You have selected User Registration. Please complete the following: \n");
+				while (uid_exists == true)
+				{
+					System.out.println("You have selected User Registration. Please complete the following: \n");
+					System.out.print("Username desired: ");  //Ask for username desired
+					uid = input.nextLine();
+					System.out.println();
+					//Check uid in db, if exists loop back
+					
+				}
 				
-				System.out.print("Username desired: ");  //Ask for username desired
-				uid = input.nextLine();
-				System.out.println();
 				
 				while (pwd_condition == false)
 				{
@@ -73,53 +70,34 @@ public class buyit {
 					//Call password function
 					checkPassword(pwd, pwd2);
 				}
-				
-				System.out.println("First Name:\n");
-				fname = input.nextLine();
-				
-				System.out.println("Last Name:\n");
-				lname = input.nextLine();
-				
-				System.out.println("Address:\n");
-				addr = input.nextLine();
-				
-				System.out.println("City:\n");
-				city = input.nextLine();
-				
-				System.out.println("State:\n");
-				state = input.nextLine();
-				
-				System.out.println("Zip Code:\n");
-				zip = input.nextLine();
-				
-				System.out.println("Email Address:\n");
-				email = input.nextLine();
-				
-				System.out.println("Credit Card No.:\n");
-				cc_num = input.nextLine();
-				
-				//Send data over to the db
-				
+
+				getUserInfo();
+				/*
 				//Print out user information onto the screen
 				System.out.println("Your username is: " + uid + " and your password is: " + pwd);
 				System.out.println("Congratulations " + fname + " " + lname +" ! Welcome to BuyIt!");
-				System.out.println("Your account has been created. Please login to your BuyIt account to use site features!");
+				System.out.println("Your account has been created. Please login to your BuyIt account to use site features!");*/
 			}
 			else if (userInput == 2) //User login
 			{
 				System.out.println("You have selected to login!");
 				
 				//User enter credentials
-				//String uid;
 				System.out.print("Enter Username: ");
 				uid = input.nextLine();
 				
-				//String pwd;
 				System.out.print("Enter Password: ");
 				pwd = input.nextLine();
 				
-				// Look up db for exact credentials
-				// compare if they are the same
+				// Connect to db
+				
+				// Lookup values for uid and pwd
+				
+				//if they are both true, go to sucess
+				
+				//else ask for credentials
+				
+				// Close connection
 				
 				//Sucess Message
 				System.out.println("Your credentials match! Login was a sucess!\n");
@@ -127,13 +105,14 @@ public class buyit {
 				
 				//Allow user to access other interfaces
 			}
-			else if (userInput == 3) //Search ADs
+			else if (userInput == 3)
 			{
-				//String search;
-				System.out.println("What are you searching for? ex. car \n");
-				search = input.nextLine();
+				System.exit(0);  //Exit
 			}
 		}
+		
+		printRegisteredMenu(); //User has been authenticated, allow access
+		
 	}catch(Exception e){
 		e.printStackTrace();
 	}
@@ -146,10 +125,18 @@ public class buyit {
 		System.out.println("What would you like to do? ");
 		System.out.println("1 - User Registration");
 		System.out.println("2 - User Login");
-		System.out.println("3 - Search ADs");
-		System.out.println("4 - Exit");
+		System.out.println("3 - Exit");
 	}
 	
+	/* FUNCTION COMMENT */
+	public static void printRegisteredMenu() 
+	{
+		System.out.println("What would you like to do? ");
+		System.out.println("1 - Search ADs");
+		System.out.println("2 - Create AD");
+		System.out.println("3 - View/Edit AD");
+		System.out.println("4 - Exit");
+	}
 	
 	/* 
 	 * This function checks if the password matches and 
@@ -157,6 +144,7 @@ public class buyit {
 	 */
 	public static boolean checkPassword(String a, String b)
 	{
+		//check for whitespace
 		match = a.equals(b);					 //Check if passwords match
 		Uppercase = !a.equals(a.toLowerCase());  //Check if password has uppercase
 		Lowercase = !a.equals(a.toUpperCase());  //Check if password has lowercase
@@ -171,11 +159,61 @@ public class buyit {
 			}
 		else 
 		{
-			if (!Uppercase || !Lowercase || !min_length || !special) {
+			if (!Uppercase || !Lowercase || !min_length || !special) 
+			{
 				System.out.println("Password doesn't meet requirements!\n");
 				return pwd_condition = false;
 			}
-			else return pwd_condition = true;
+			else
+			{
+				//Write uid and pwd to db
+					
+				return pwd_condition = true;
+			}
 		}
-	}
+	} //end of check password function
+	
+	public static void getUserInfo() 
+	{
+		String fname = null;
+		String lname = null;
+		String addr = null;
+		String city = null;
+		String state = null;
+		String email = null;
+		String search = null;
+		String zip = null;
+		String cc_num = null;
+				
+					System.out.println("First Name:\n");
+					fname = input.nextLine();
+					
+					System.out.println("Last Name:\n");
+					lname = input.nextLine();
+					
+					System.out.println("Address:\n");
+					addr = input.nextLine();
+					
+					System.out.println("City:\n");
+					city = input.nextLine();
+					
+					System.out.println("State:\n");
+					state = input.nextLine();
+					
+					System.out.println("Zip Code:\n");
+					zip = input.nextLine();
+					
+					System.out.println("Email Address:\n");
+					email = input.nextLine();
+					
+					System.out.println("Credit Card No.:\n");
+					cc_num = input.nextLine();
+					
+					//Connect to db
+					
+					//Write data to db fields
+					
+					//Close connection
+					
+	} //end of get user information function
 }
