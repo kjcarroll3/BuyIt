@@ -95,11 +95,11 @@ public class buyit {
 				
 				//if they are both true, go to sucess
 				
-				//else ask for credentials
+				//else ask for credentials again
 				
 				// Close connection
 				
-				//Sucess Message
+				//Sucess Message (work with jaeryn to get boolean)
 				System.out.println("Your credentials match! Login was a sucess!\n");
 				uauth = uauth + 20; //user authentication flag
 				
@@ -185,29 +185,37 @@ public class buyit {
 		String zip = null;
 		String cc_num = null;
 				
-					System.out.println("First Name:\n");
+					System.out.print("First Name: ");
 					fname = input.nextLine();
+					System.out.println();
 					
-					System.out.println("Last Name:\n");
+					System.out.print("Last Name:");
 					lname = input.nextLine();
+					System.out.println();
 					
-					System.out.println("Address:\n");
+					System.out.print("Address:\n");
 					addr = input.nextLine();
+					System.out.println();
 					
-					System.out.println("City:\n");
+					System.out.print("City:\n");
 					city = input.nextLine();
+					System.out.println();
 					
-					System.out.println("State:\n");
+					System.out.print("State:\n");
 					state = input.nextLine();
+					System.out.println();
 					
-					System.out.println("Zip Code:\n");
+					System.out.print("Zip Code:\n");
 					zip = input.nextLine();
+					System.out.println();
 					
-					System.out.println("Email Address:\n");
+					System.out.print("Email Address:\n");
 					email = input.nextLine();
+					System.out.println();
 					
-					System.out.println("Credit Card No.:\n");
+					System.out.print("Credit Card No.:\n");
 					cc_num = input.nextLine();
+					System.out.println();
 					
 					//Connect to db
 					
