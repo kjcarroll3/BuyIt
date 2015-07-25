@@ -26,7 +26,7 @@ public class buyit {
 
 	//Variables
 	int userInput = 0; //UI flag
-	int uauth = 0;	//User authentication flag
+	int uauth = 0;	//User authentication flag 0 means unauthorized, 20 means authorized
 	
 	String uid = null;
 	String pwd = null;
